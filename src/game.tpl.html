@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title><%= htmlWebpackPlugin.options.game.name %> Spielanleitung</title>
+</head>
+
+<body>
+
+<main class="container">
+    <div class="row my-4">
+        <div class="col text-center">
+            <h1><%= htmlWebpackPlugin.options.game.name %> Spielanleitung</h1>
+        </div>
+    </div>
+    <div class="row my-4">
+        <div class="col text-center">
+            <p>Dieses Spiel wird Ihnen von <%= htmlWebpackPlugin.options.game.url %> bereitgestellt, wenn Sie einem
+                Spiel beitreten oder ein Spiel erstellen werden Sie innerhalb dieses Fensters weitergeleitet. Dort
+                gelten die Rechte und Nutzungsbedingungen des Anbieters.</p>
+        </div>
+    </div>
+    <div class="row my-4">
+        <div class="col">
+
+            <div class="accordion" id="accordionGameplay">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Spiel beitreten
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                         data-bs-parent="#accordionGameplay">
+                        <div class="accordion-body">
+
+                            <p>Um einem Spiel beitreten zu können, muss ein Mitglied ihrer Spielgruppe ein <strong>Spiel
+                                erstellt</strong> haben.</p>
+
+                            <p>Den Link zum Spiel finden Sie im <strong>Chat</strong> der Spielgruppe, nachdem der
+                                Ersteller des Spiels ihn dort veröffentlicht hat.</p>
+
+                            <p><strong>Kopieren</strong> Sie den Link zum Spiel und fügen Sie ihn in das folgende
+                                <strong>Eingabefeld</strong> ein. </p>
+
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <div class="input-group">
+                                    <input id="input-private-game-url" type="text" class="form-control"
+                                           placeholder="<%= htmlWebpackPlugin.options.game.url %>"
+                                           pattern="<%= htmlWebpackPlugin.options.game.pattern %>"
+                                           aria-label="Private Game URL" aria-describedby="button-join">
+                                    <a id="button-join" href="<%= htmlWebpackPlugin.options.game.url %>" target="_self"
+                                       class="btn btn-primary"
+                                       type="button" role="button" data-input="input-private-game-url">Beitreten</a>
+                                    <div class="invalid-feedback">
+                                        Ungültige Eingabe!
+                                    </div>
+                                </div>
+                                <script>
+                                    document.getElementById("button-join").addEventListener("click", function (event) {
+                                        event.preventDefault();
+                                        /** @type {HTMLInputElement} */
+                                        const input = document.getElementById(this.dataset["input"]);
+                                        /**
+                                         * @param {HTMLInputElement} input
+                                         * @returns {boolean}
+                                         */
+                                        const isValidInput = function (input) {
+                                            return !!input.value.trim().match(new RegExp(input.pattern, 'i'))
+                                        }
+                                        if (isValidInput(input)) {
+                                            input.classList.remove("is-invalid")
+                                            window.location.href = input.value;
+                                        } else {
+                                            input.classList.add("is-invalid")
+                                        }
+                                    })
+                                </script>
+                            </div>
+
+                            <p class="my-3">Drücken Sie auf die <strong>Beitreten-Schaltfläche</strong>, um das Spiel zu
+                                starten.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Spiel erstellen
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                         data-bs-parent="#accordionGameplay">
+                        <div class="accordion-body">
+                            <p>Um ein Spiel zu erstellen, müssen Sie auf <%= htmlWebpackPlugin.options.game.name %> ein
+                                <strong>privates Spiel</strong> erstellen.</p>
+                            <p><strong>Kopieren</strong> Sie den Link anschließend in <strong>Chat</strong> ihrer
+                                Spielgruppe, damit die anderen Spieler ihrem Spiel beitreten können.</p>
+                            <p>Ein privates Spiel erstellen Sie, indem Sie auf die folgende <strong>Erstellen-Schaltfläche</strong>
+                                klicken.
+                            </p>
+                            <p>
+                                <%= htmlWebpackPlugin.options.game.inGameStep %>
+                            </p>
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <a class="btn btn-primary" href="<%= htmlWebpackPlugin.options.game.url %>"
+                                   role="button" target="_self">Erstellen</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Spielfläche vergrößern
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                         data-bs-parent="#accordionGameplay">
+                        <div class="accordion-body">
+                            <p>Die Spielfläche können Sie vergrößern, indem Sie auf das Symbol mit den <strong>drei
+                                vertikalen Strichen</strong> im Zentrum ihres Sichtbereichs klicken und die Taste
+                                gedrückt halten.
+                            </p>
+                            <p>Verschieben Sie die Maus auf der <strong>horizontalen Achse</strong>.</p>
+                            <p><strong>Lösen</strong> Sie den Klick, sobald Sie die optimale Position erreicht haben.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
