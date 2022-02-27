@@ -56,7 +56,7 @@ module.exports = {
                 name: "Gartic Phone",
                 url: "https://garticphone.com/",
                 pattern: "^https:\\/\\/garticphone\\.com\\/",
-                inGameStep: "Innerhalb des Spiels müssen sie auf \"Start\" klicken. Den Link kopieren Sie, indem Sie auf \"Einladen\" klicken."
+                inGameStep: "Innerhalb des Spiels müssen Sie auf \"Start\" klicken. Den Link kopieren Sie, indem Sie auf \"Einladen\" klicken."
             }
         }),
         new HtmlWebpackPlugin({
@@ -67,7 +67,7 @@ module.exports = {
                 name: "Stadt Land Fluss",
                 url: "https://stadtlandfluss.cool/",
                 pattern: "^https:\\/\\/stadtlandfluss\\.cool\\/",
-                inGameStep: "Innerhalb des Spiels müssen sie auf \"Spiel erstellen\" klicken. Den Link kopieren Sie, indem Sie auf \"Kopieren\" klicken."
+                inGameStep: "Innerhalb des Spiels müssen Sie auf \"Spiel erstellen\" klicken. Den Link kopieren Sie, indem Sie auf \"Kopieren\" klicken."
             }
         }),
         new HtmlWebpackPlugin({
